@@ -18,3 +18,32 @@
 - String 관련 기능 중 title()을 하면 첫 글자가 대문자가 된다.
 - dir(list)같은걸 할 때 __sth__ 처럼 underscore가 2개 붙은것이 있는데 이는 파이썬이 내부적으로 쓰는 메소드이다.(인터프리터가 해석할 때 사용)
 - list [] tuple ()
+- 
+## 7/29, 30
+-  for문에 enumerate를 써서 index를 받을 수 있다.(for-loop)
+- ``` 
+  for index, item in enumerate(todos):
+      row = f"{index+1}.{item.capitalize()}"
+      print(row)
+  ```
+  
+- 파일 위치를 나타낼때 경로 separator에 \를 쓴다면
+open(r"c:\Users...", "w") 와 같이 r을 붙이면 된다.
+
+- 두개의 list를 하나의 for문 안에서 사용하려면 zip()을 이용한다.
+```python
+    contents = ["sample1" " add extra string", "sample2", "sample3"]
+    
+    filenames = ["doc.txt", "report.txt", "presentation.txt"]
+    
+    for content, filename in zip(contents, filenames):
+        file = open(f"files/{filename}", 'w')
+        file.write(content)
+        file.close()
+```
+
+## 8/11
+
+- string.strip([문자]): 원래 문자열의 시작과 끝에서 주어진 문자를 제거 <br>
+- list comprehension: [ ( 변수를 활용한 값 ) for ( 사용할 변수 이름 ) in ( 순회할 수 있는 값 )]
+- ex)arr = [i * 2 for i in range(size)]
