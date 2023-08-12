@@ -58,4 +58,25 @@ with open("files/doc.txt", "r") as file:
 print(some_str) #출력가능
 ```
 - 파일을 열고 쓸 수 있는 open()함수는 기본값이 "r"이다. 위에서 "r"은 생략 가능하다.
-- 
+
+## 8/12
+#### 배운점: try-except, function (def)
+
+- try-catch는 파이썬에서 try-except 이다.
+```python
+ try:
+...
+  except IndexError:
+...
+
+```
+- python의 function은 def로 정의한다.
+
+```python
+def greet():
+    message="hello"
+    new_message=message.capitalize()
+    return new_message
+```
+function은 scope를 가지며, 해당 함수안의 변수는 외부에서 접근할 수 없다.
+
