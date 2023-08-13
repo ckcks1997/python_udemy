@@ -80,3 +80,55 @@ def greet():
 ```
 function은 scope를 가지며, 해당 함수안의 변수는 외부에서 접근할 수 없다.
 
+
+## 8/13
+#### 배운점: function의 default parameter, local modules
+- 파라미터에 기본값을 설정할 수 있다.
+- default파라미터가 있는것과 없는것을 섞어쓰려면, 기본파라미터가 있는 값을 뒤에 쓴다.
+```python
+def get_todos(filepath="todos.txt"):
+    with open(filepath, 'r') as file:
+        todos = file.readlines()
+    return todos
+
+def write_todos(filepath, todos_arg="hello"):
+    with open(filepath, 'w') as file:
+        file.writelines(todos_arg)
+```
+
+- 문자열을 보기 좋게 끊기위해서 \를 사용할 수 있다.
+```python
+str = "\
+hello\
+world"
+
+print(str)  #helloworld
+```
+
+#### local modules
+- 모듈을 가져오는 방법은 아래와 같이 두가지가 있다.
+- 첫번째는 modules 패키지 안의 functions.py에서 바로 메소드를 가져오는 방식이며
+- 두번째 방식은 py파일을 import하여 가져오는 방식이다.
+
+```python
+from modules.functions import get_todos, write_todos
+from modules import functions
+
+#두번째 방식은 아래와 같이 파일명을 명시하여 사용해야한다.
+functions.write_todos(todos)
+```
+
+####  `__name__` : 
+- 다른 모듈에서 import 하는 경우:
+다른 모듈에서 import 되는 경우,
+스크립트 파일의 이름이 모듈 이름으로 사용. 
+이때 __main__은 현재 스크립트 파일의 이름이 아니라 모듈 이름이 된다.
+<br>
+- 직접 스크립트 파일을 실행하는 경우:
+스크립트 파일이 직접 실행될 때는 __main__이라는 
+ 특별한 값이 생성되며, 이를 이용하여 스크립트 파일 내에서 
+실행할 코드 블록을 지정할 수 있다.
+```python
+if __name__ == "__main__": #해당파일을 직접 실행한 경우
+    print('main')
+```
