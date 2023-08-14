@@ -132,3 +132,39 @@ functions.write_todos(todos)
 if __name__ == "__main__": #해당파일을 직접 실행한 경우
     print('main')
 ```
+
+#### `__init__.py`: 패키지임을 알리는 역할을 하는 파일
+
+
+## 8/14
+#### 배운점: 다양한 standard modules(time, glob, csv, shutil, webbrowser, json)
+
+#### time: 시간을 다루는 모듈
+```python
+import time
+print(time.strftime("%m.%d.%y"))
+```
+
+- glob: 
+- csv: csv파일을 로드하는 모듈
+- shutil: 압축관련 모듈
+```python
+import shutil
+
+# files 디렉토리의 파일을 zip파일로 output이라는 이름으로 생성
+shutil.make_archive("output", "zip", "files")
+```
+
+- random: 랜덤값 생성 모듈
+```python
+import random
+
+# Get two numbers from the user and covert them to integers
+lower_bound = int(input("Enter the lower bound: "))
+upper_bound = int(input("Enter the upper bound: "))
+
+# Pick a random int using randrange()
+rand = random.randrange(lower_bound, upper_bound + 1) # We add 1 to upper_bound because randrange does not include the upper_bound number.
+
+print(rand)
+```
