@@ -168,3 +168,8 @@ rand = random.randrange(lower_bound, upper_bound + 1) # We add 1 to upper_bound 
 
 print(rand)
 ```
+
+## 8/15
+#### 배운 점: PySimpleGUI
+- day16 패키지 참고
+
