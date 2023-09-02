@@ -1,6 +1,8 @@
 def get_todos():
     with open("files/todos.txt", 'r') as file:
         todos = file.readlines()
+        print('test')
+        print(todos)
     return todos
 
 

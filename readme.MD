@@ -54,10 +54,27 @@ open(r"c:\Users...", "w") 와 같이 r을 붙이면 된다.
 - 또한, with는 스코프를 만드는 것이 아니기 때문에, with안에서 선언한 변수는 바깥 스코프 혹은 global 스코프가 된다.
 ```python
 with open("files/doc.txt", "r") as file:
-    some_str = file.read() #엔터를 \n으로 받고싶지 않으면 readlines() 사용
+    some_str = file.read() #엔터를 \n으로 받고싶지 않으면 read() 사용
 print(some_str) #출력가능
 ```
 - 파일을 열고 쓸 수 있는 open()함수는 기본값이 "r"이다. 위에서 "r"은 생략 가능하다.
+
+##### read() vs readlines()
+-만약 다음과 같은 텍스트파일을 open하여 읽는다면
+```text
+hello
+world
+```
+- read():
+```text
+hello
+world
+```
+- readlines():
+```text
+['hello\n', 'world\n']
+```
+위와 같은 차이가 있다.
 
 ## 8/12
 #### 배운점: try-except, function (def)
@@ -172,4 +189,79 @@ print(rand)
 ## 8/15
 #### 배운 점: PySimpleGUI
 - day16 패키지 참고
+
+
+## 9/2
+#### 배운 점: class(공부중..)
+- class 이름은 Pascal case로.
+- class 안에 정의된 def는 function이 아니라 method라고 한다.
+- method는 파라미터로 self가 있어야 한다.
+- 클래스 안에 def __init__(self)를 선언하면 생성자 역할을 한다.
+- 예시:
+```python
+import pandas
+
+df = pandas.read_csv("hotels.csv", dtype={"id":str})
+class Hotel:
+
+    def __init__(self, hotel_id):
+        self.hotel_id = hotel_id
+        self.name = df.loc[df["id"] == self.hotel_id, "name"].squeeze()
+
+    def book(self):
+        df.loc[df["id"] == self.hotel_id, "available"] == "no"
+        df.to_csv("hotels.csv", index=False)
+
+    def available(self):
+        if df.loc[df["id"] == self.hotel_id, "available"].squeeze() == "yes":
+            return True
+        else:
+            return False
+        pass
+
+class ReservationTicket:
+    def __init__(self, customer_name, hotel_obj):
+        self.customer_name = customer_name
+        self.hotel_obj = hotel_obj
+    def generate(self):
+        content = f"""
+            Thank you,
+            Name: {self.customer_name}
+            Hotel:{self.hotel_obj.name}
+        """
+        return content
+
+print(df)
+hotel_id = input("enter id of the hotel")
+hotel = Hotel(hotel_id)
+
+if hotel.available():
+    hotel.book()
+    name = input("enter name:")
+    reservation_ticket = ReservationTicket(name, hotel)
+    print(reservation_ticket.generate())
+
+else:
+    print("hotel is not free")
+```
+- 호텔 예약을 하는 코드이다.
+- 클래스 안의 인스턴스 변수는 self를 통해 정의하고 저장한다. 위 예제에서는 __init__ 메서드 안에서 인스턴스 변수를 선언하였는데, __init__안에서만 선언 가능한 것은 아니고 다른 매서드에서도 self를 통해 선언 가능하나..
+```python
+class A:
+    def __init__(self):
+        self.x = 1
+
+    def call1(self):
+        self.y = 2
+
+
+a = A()
+print(a.x)
+#print(a.y) //오류
+a.call1()
+print(a.y)
+
+```
+- 위와 같이 call1()을 호출하기 전 아직 선언되지 않은 y값을 조회하려고 하면 AttributeError 오류가 발생한다.
+- 이외의 전체적인 개념은 자바와 매우 유사한 느낌..
 
